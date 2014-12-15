@@ -17,7 +17,7 @@ public:
 public:
     virtual bool show_content() = 0;
 
-protected slots:
+public slots:
     inline void react(){show_content();}
 };
 

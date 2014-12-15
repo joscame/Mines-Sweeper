@@ -20,13 +20,15 @@ SOURCES += main.cpp\
     minespace.cpp \
     numberspace.cpp \
     minesweeper.cpp \
+    vectorshuffle.cpp
 
 HEADERS  += mainwindow.h \
     minesweeperbutton.h \
     whitespace.h \
     minespace.h \
     numberspace.h \
-    minesweeper.h
+    minesweeper.h \
+    vectorshuffle.h
 
 FORMS    += mainwindow.ui
 
@@ -34,4 +36,14 @@ OTHER_FILES +=
 
 RESOURCES += \
     assets/mine.qrc \
-    new_game.qrc
+    new_game.qrc \
+    assets/1.qrc \
+    assets/2.qrc \
+    assets/3.qrc \
+    assets/4.qrc \
+    assets/5.qrc \
+    assets/6.qrc \
+    assets/7.qrc \
+    assets/8.qrc \
+    assets/start_button.qrc \
+    assets/background.qrc

@@ -10,11 +10,28 @@
     <height>348</height>
    </rect>
   </property>
+  <property name="cursor">
+   <cursorShape>PointingHandCursor</cursorShape>
+  </property>
+  <property name="mouseTracking">
+   <bool>true</bool>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Main Sweeper</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="assets/mine.qrc">
+    <normaloff>:/mina</normaloff>:/mina</iconset>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout"/>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QGraphicsView" name="graphicsView"/>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -25,35 +42,45 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuMine_Sweeper">
+    <property name="title">
+     <string>Mine Sweeper</string>
+    </property>
+    <addaction name="actionExit"/>
+   </widget>
+   <addaction name="menuMine_Sweeper"/>
   </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-   <addaction name="actionNew_game"/>
-  </widget>
-  <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionNew_game">
+  <action name="actionExit">
    <property name="icon">
     <iconset resource="new_game.qrc">
-     <normaloff>:/assets/new.svg</normaloff>
-     <normalon>:/new</normalon>
-     <selectedon>:/assets/new.svg</selectedon>:/assets/new.svg</iconset>
+     <normaloff>:/assets/new.svg</normaloff>:/assets/new.svg</iconset>
    </property>
    <property name="text">
-    <string>New_game</string>
-   </property>
-   <property name="toolTip">
-    <string>starts a new one</string>
+    <string>Exit</string>
    </property>
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
   <include location="new_game.qrc"/>
+  <include location="assets/mine.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actionExit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>195</x>
+     <y>173</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

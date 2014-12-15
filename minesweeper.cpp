@@ -2,30 +2,26 @@
 #include <QGlobal.h>
 #include <QTime>
 #include <QVector>
+#include <iostream>
+#include <vectorshuffle.h>
 
 MineSweeper::MineSweeper()
     :mines_map(400)
 {
+    for (int i = 0; i < 400; ++i)
+        mines_map[i] = 0;
 }
 
 bool MineSweeper::random_fill()
 {
     int mines = 0;
-    int row;
-    int col;
+    VectorShuffle shuffler;
+    QVector<int> mine_spots(60);
+    shuffler.get_random_QNumVec(mine_spots);
     //rellena las minas aleatorias con simbolo de -1, aun no funciona correctamente.
-    while ( mines < 100 )
+    while ( mines < 60 )
     {
-        int qseed = 1;
-        row = randInt(0, 19, mines);
-        col = randInt(0, 19, mines);
-        while( mines_map[index(row, col)] == -1)
-        {
-            row = randInt(0, 19, qseed);
-            col = randInt(0, 19, qseed);
-            ++qseed;
-        }
-        mines_map[index(row, col)] = -1;
+        mines_map[mine_spots[mines]] = -1;
         ++mines;
     }
     return fill_numbers();
@@ -52,22 +48,25 @@ bool MineSweeper::fill_numbers()
     {
         for (int col = 0; col < 20; ++col)
         {
-            int contador = 0;
-            if (mines_map[col < 19 && index(row, col+1)] == -1) ++contador;
-            if (mines_map[col > 0 && index(row, col-1)] == -1) ++contador;
-            if (mines_map[row > 0 && index(row - 1, col)] == -1) ++contador;
-            if (mines_map[row < 19 && index(row+ 1, col)] == -1) ++contador;
-            if (mines_map[row, col > 0 && index(row-1, col-1)] == -1) ++contador;
-            if (mines_map[row < 19 && col > 0 && index(row+1, col-1)] == -1) ++contador;
-            if (mines_map[row > 0 && col < 19 && index(row-1, col+1)] == -1) ++contador;
-            if (mines_map[row, col > 19 && index(row+1, col+1)] == -1) ++contador;
-            mines_map[index(row, col)] = contador;
+            if(mines_map[index(row, col)] != -1)
+            {
+                int contador = 0;
+                if (col < 19 && mines_map[index(row, col+1)] == -1) ++contador;
+                if (col > 0 && mines_map[index(row, col-1)] == -1) ++contador;
+                if (row > 0 && mines_map[index(row - 1, col)] == -1) ++contador;
+                if (row < 19 && mines_map[index(row+ 1, col)] == -1) ++contador;
+                if (row > 0 && col > 0 && mines_map[index(row-1, col-1)] == -1) ++contador;
+                if (row < 19 && col > 0 && mines_map[index(row+1, col-1)] == -1) ++contador;
+                if (row > 0 && col < 19 && mines_map[index(row-1, col+1)] == -1) ++contador;
+                if (row < 19 && col < 19 && mines_map[index(row+1, col+1)] == -1) ++contador;
+                mines_map[index(row, col)] = contador;
+            }
         }
     }
     return true;
 }
 
-const int MineSweeper::getSpace(int row, int col)
+int MineSweeper::getSpace(int row, int col)
 {
     return mines_map[index(row, col)];
 }

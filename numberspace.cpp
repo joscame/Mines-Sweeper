@@ -1,16 +1,22 @@
 #include "numberspace.h"
+#include "mainwindow.h"
 
-NumberSpace::NumberSpace(QWidget *parent, int row, int col):
+NumberSpace::NumberSpace(QWidget *parent, int row, int col, int number, MainWindow *intz):
     MineSweeperButton(parent, row, col)
+  , file_name(":/")
+  , interfaz(intz)
 {
+    QString num = QString::number(number);
+    file_name = file_name + num + ".png";
 }
 
 bool NumberSpace::show_content()
 {
-    QString label(QString::number(number));
-    setText(label);
+    QPixmap image(file_name);
+    QIcon number_icon(image);
+    setIcon(number_icon);
     setEnabled(false);
-    return true;
+    return interfaz->turn_switch();
 }
 
 bool NumberSpace::set_number(int num)

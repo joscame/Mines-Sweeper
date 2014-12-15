@@ -14,7 +14,7 @@ public:
     int randInt(int first, int last, int qseed);
     int index(int row, int col);
     bool fill_numbers();
-    const int getSpace(int row, int col);
+    int getSpace(int row, int col);
     void clear();
 };
 
